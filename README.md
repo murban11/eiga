@@ -1,5 +1,10 @@
 # Eiga
 
+## Cloning
+```
+git clone --recurse-submodules https://github.com/murban11/eiga
+```
+
 ## Project setup
 ```
 npm install
