@@ -3,7 +3,7 @@
     <form>
       <fieldset>
         <legend>Title</legend>
-        <input type="text" @input="titleInputChanged" />
+        <input type="text" @input="onTitleInputChange" />
       </fieldset>
       <fieldset>
         <legend>Release Year (not implemented yet)</legend>
@@ -42,7 +42,7 @@ export default {
     'title-filter',
   ],
   methods: {
-    titleInputChanged(e) {
+    onTitleInputChange(e) {
       this.$emit('title-filter', e.target.value)
     }
   },
