@@ -17,7 +17,7 @@ export default {
   props: {
     movieData: {
       type: Array,
-    }
-  },
+    },
+  }
 }
 </script>

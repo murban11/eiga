@@ -9,19 +9,13 @@
         <legend>Release Year</legend>
         <label for="startYear">from:</label>
         <select id="startYear" @input="onStartYearInput"> 
-          <option
-            v-for="i in [...Array(2025-1900).keys()].map(j => j + 1900)"
-            :key="i"
-            >
+          <option v-for="i in getYears()" :key="i">
               {{ i }}
           </option>
         </select>
         <label for="endYear">to:</label>
         <select id="endYear" @input="onEndYearInput">
-          <option
-            v-for="i in [...Array(2025-1900).keys()].map(j => j + 1900).reverse()"
-            :key="i"
-            >
+          <option v-for="i in getYears().reverse()" :key="i">
               {{ i }}
           </option>
         </select>
@@ -37,7 +31,17 @@
 </template>
 
 <script>
+let _ = require('underscore')
+
 export default {
+  props: {
+    minYear: {
+      type: Number,
+    },
+    maxYear: {
+      type: Number,
+    },
+  },
   emits: [
     'title-filter',
     'start-year',
@@ -52,6 +56,9 @@ export default {
     },
     onEndYearInput(e) {
       this.$emit('end-year', e.target.value)
+    },
+    getYears() {
+      return _.range(this.minYear, this.maxYear);
     },
   },
 }

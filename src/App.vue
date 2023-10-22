@@ -1,6 +1,8 @@
 <template>
-  <SimpleHeader />
+  <h1>Eiga</h1>
   <MovieSearcher
+    :minYear="minYear"
+    :maxYear="maxYear"
     @title-filter="onTitleFilterChange"
     @start-year="onStartYearChange"
     @end-year="onEndYearChange"
@@ -10,7 +12,6 @@
 </template>
 
 <script>
-import SimpleHeader from './components/SimpleHeader.vue'
 import MovieSearcher from './components/MovieSearcher.vue'
 import MovieList from './components/MovieList.vue'
 import MovieData from './assets/movie-data/movies.json'
@@ -20,14 +21,18 @@ let _ = require('underscore')
 export default {
   name: 'App',
   components: {
-    SimpleHeader,
     MovieSearcher,
     MovieList,
   },
   data() {
     return {
-      noOfVisible: 10,
       movieData: MovieData,
+
+      noOfVisible: 10,
+      minNoOfVisible: 10,
+
+      minYear: 1900,
+      maxYear: 2024,
 
       titleFilter: '',
       startYear: 1900,
@@ -36,7 +41,7 @@ export default {
   },
   methods: {
     showMore() {
-      this.noOfVisible += 10
+      this.noOfVisible += this.minNoOfVisible
     },
     filterMovies() {
       let filteredMovieList = _.filter(this.movieData, (e) => {
@@ -53,15 +58,15 @@ export default {
     },
     onTitleFilterChange(msg) {
       this.titleFilter = msg;
-      this.noOfVisible = 10;
+      this.noOfVisible = this.minNoOfVisible;
     },
     onStartYearChange(msg) {
       this.startYear = msg;
-      this.noOfVisible = 10;
+      this.noOfVisible = this.minNoOfVisible;
     },
     onEndYearChange(msg) {
       this.endYear = msg;
-      this.noOfVisible = 10;
+      this.noOfVisible = this.minNoOfVisible;
     },
   }
 }
