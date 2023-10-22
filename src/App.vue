@@ -3,9 +3,11 @@
   <MovieSearcher
     :minYear="minYear"
     :maxYear="maxYear"
+    :genres="genres"
     @title-filter="onTitleFilterChange"
     @start-year="onStartYearChange"
     @end-year="onEndYearChange"
+    @genres-selected="onGenresChange"
     />
   <MovieList :movieData="filterMovies()" />
   <button @click="showMore">Show more</button>
@@ -27,6 +29,9 @@ export default {
   data() {
     return {
       movieData: MovieData,
+      genres: _.uniq(_.flatten(_.map(MovieData, (e) => {
+        return e.genres;
+      }), 1)),
 
       noOfVisible: 10,
       minNoOfVisible: 10,
@@ -37,6 +42,7 @@ export default {
       titleFilter: '',
       startYear: 1900,
       endYear: 2024,
+      genresSelected: [],
     }
   },
   methods: {
@@ -51,7 +57,13 @@ export default {
       if (this.titleFilter !== '') {
         filteredMovieList = _.filter(filteredMovieList, (e) => {
           return e.title === this.titleFilter;
-        })
+        });
+      }
+
+      if (this.genresSelected.length > 0) {
+        filteredMovieList = _.filter(filteredMovieList, (e) => {
+          return _.intersection(e.genres, this.genresSelected).length > 0;
+        });
       }
 
       return filteredMovieList.slice(0, this.noOfVisible);
@@ -66,6 +78,10 @@ export default {
     },
     onEndYearChange(msg) {
       this.endYear = msg;
+      this.noOfVisible = this.minNoOfVisible;
+    },
+    onGenresChange(msg) {
+      this.genresSelected = msg;
       this.noOfVisible = this.minNoOfVisible;
     },
   }
