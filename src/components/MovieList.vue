@@ -3,7 +3,10 @@
     <h2>Movies</h2>
     <ul>
       <li v-for="(movie, i) in movieData" :key="i">
-        {{ movie.title }}
+        Title: {{ movie.title }}<br>
+        Year: {{ movie.year }}<br>
+        Cast: {{ movie.cast }}<br>
+        Genres: {{ movie.genres }}<br>
       </li>
     </ul>
   </div>
