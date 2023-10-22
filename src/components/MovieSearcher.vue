@@ -2,8 +2,8 @@
   <div>
     <form>
       <fieldset>
-        <legend>Title (not implemented yet)</legend>
-        <input id="titleInput" type="text">
+        <legend>Title</legend>
+        <input type="text" @input="titleInputChanged" />
       </fieldset>
       <fieldset>
         <legend>Release Year (not implemented yet)</legend>
@@ -35,3 +35,16 @@
     </form>
   </div>
 </template>
+
+<script>
+export default {
+  emits: [
+    'title-filter',
+  ],
+  methods: {
+    titleInputChanged(e) {
+      this.$emit('title-filter', e.target.value)
+    }
+  },
+}
+</script>
