@@ -6,9 +6,9 @@
         <input type="text" @input="onTitleInputChange" />
       </fieldset>
       <fieldset>
-        <legend>Release Year (not implemented yet)</legend>
+        <legend>Release Year</legend>
         <label for="startYear">from:</label>
-        <select id="startYear">
+        <select id="startYear" @input="onStartYearInput"> 
           <option
             v-for="i in [...Array(2025-1900).keys()].map(j => j + 1900)"
             :key="i"
@@ -17,7 +17,7 @@
           </option>
         </select>
         <label for="endYear">to:</label>
-        <select id="endYear">
+        <select id="endYear" @input="onEndYearInput">
           <option
             v-for="i in [...Array(2025-1900).keys()].map(j => j + 1900).reverse()"
             :key="i"
@@ -40,11 +40,19 @@
 export default {
   emits: [
     'title-filter',
+    'start-year',
+    'end-year',
   ],
   methods: {
     onTitleInputChange(e) {
       this.$emit('title-filter', e.target.value)
-    }
+    },
+    onStartYearInput(e) {
+      this.$emit('start-year', e.target.value)
+    },
+    onEndYearInput(e) {
+      this.$emit('end-year', e.target.value)
+    },
   },
 }
 </script>

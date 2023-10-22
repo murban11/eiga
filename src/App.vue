@@ -1,6 +1,10 @@
 <template>
   <SimpleHeader />
-  <MovieSearcher @title-filter="onTitleFilterChange" />
+  <MovieSearcher
+    @title-filter="onTitleFilterChange"
+    @start-year="onStartYearChange"
+    @end-year="onEndYearChange"
+    />
   <MovieList :movieData="filterMovies()" />
   <button @click="showMore">Show more</button>
 </template>
@@ -26,6 +30,8 @@ export default {
       movieData: MovieData,
 
       titleFilter: '',
+      startYear: 1900,
+      endYear: 2024,
     }
   },
   methods: {
@@ -33,10 +39,12 @@ export default {
       this.noOfVisible += 10
     },
     filterMovies() {
-      let filteredMovieList = this.movieData;
+      let filteredMovieList = _.filter(this.movieData, (e) => {
+        return e.year >= this.startYear && e.year <= this.endYear;
+      });
 
       if (this.titleFilter !== '') {
-        filteredMovieList = _.filter(this.movieData, (e) => {
+        filteredMovieList = _.filter(filteredMovieList, (e) => {
           return e.title === this.titleFilter;
         })
       }
@@ -45,6 +53,14 @@ export default {
     },
     onTitleFilterChange(msg) {
       this.titleFilter = msg;
+      this.noOfVisible = 10;
+    },
+    onStartYearChange(msg) {
+      this.startYear = msg;
+      this.noOfVisible = 10;
+    },
+    onEndYearChange(msg) {
+      this.endYear = msg;
       this.noOfVisible = 10;
     },
   }
