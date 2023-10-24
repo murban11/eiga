@@ -4,10 +4,12 @@
     :minYear="minYear"
     :maxYear="maxYear"
     :genres="genres"
+    :cast="cast"
     @title-filter="onTitleFilterChange"
     @start-year="onStartYearChange"
     @end-year="onEndYearChange"
-    @genres-selected="onGenresChange"
+    @genres-selected="onGenreFilterChange"
+    @cast-selected="onCastFilterChange"
     />
   <MovieList :movieData="filterMovies()" />
   <button @click="showMore">Show more</button>
@@ -32,6 +34,9 @@ export default {
       genres: _.uniq(_.flatten(_.map(MovieData, (e) => {
         return e.genres;
       }), 1)),
+      cast: _.uniq(_.flatten(_.map(MovieData, (e) => {
+        return e.cast;
+      }), 1)),
 
       noOfVisible: 10,
       minNoOfVisible: 10,
@@ -43,6 +48,7 @@ export default {
       startYear: 1900,
       endYear: 2024,
       genresSelected: [],
+      castSelected: [],
     }
   },
   methods: {
@@ -66,6 +72,12 @@ export default {
         });
       }
 
+      if (this.castSelected.length > 0) {
+        filteredMovieList = _.filter(filteredMovieList, (e) => {
+          return _.intersection(e.cast, this.castSelected).length > 0;
+        });
+      }
+
       return filteredMovieList.slice(0, this.noOfVisible);
     },
     onTitleFilterChange(msg) {
@@ -80,8 +92,12 @@ export default {
       this.endYear = msg;
       this.noOfVisible = this.minNoOfVisible;
     },
-    onGenresChange(msg) {
+    onGenreFilterChange(msg) {
       this.genresSelected = msg;
+      this.noOfVisible = this.minNoOfVisible;
+    },
+    onCastFilterChange(msg) {
+      this.castSelected = msg;
       this.noOfVisible = this.minNoOfVisible;
     },
   }
