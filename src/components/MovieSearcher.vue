@@ -47,6 +47,7 @@
           </option>
         </datalist>
       </fieldset>
+      <button @click="onSearchButtonClick" type="button">Search</button>
     </form>
   </div>
 </template>
@@ -60,6 +61,9 @@ let _ = require('underscore')
 export default {
   data() {
     return {
+      titleFilter: "",
+      startYear: this.minYear,
+      endYear: this.maxYear,
       genresSelected: [],
       castSelected: [],
       castInput: "",
@@ -84,21 +88,17 @@ export default {
     },
   },
   emits: [
-    'title-filter',
-    'start-year',
-    'end-year',
-    'genres-selected',
-    'cast-selected',
+    'search',
   ],
   methods: {
     onTitleInputChange(e) {
-      this.$emit('title-filter', e.target.value)
+      this.titleFilter = e.target.value
     },
     onStartYearInput(e) {
-      this.$emit('start-year', e.target.value)
+      this.startYear = e.target.value
     },
     onEndYearInput(e) {
-      this.$emit('end-year', e.target.value)
+      this.endYear = e.target.value
     },
     onGenreToggle(genre) {
       if (_.contains(this.genresSelected, genre)) {
@@ -108,23 +108,29 @@ export default {
       } else {
         this.genresSelected.push(genre)
       }
-      this.$emit('genres-selected', this.genresSelected)
     },
     onCastSelect() {
       if (!_.contains(this.castSelected, this.castInput)) {
         this.castSelected.push(this.castInput);
-        this.$emit('cast-selected', this.castSelected);
       }
     },
     onCastUnselect(cast) {
       this.castSelected = _.filter(this.castSelected, (e) => {
         return e !== cast;
       });
-      this.$emit('cast-selected', this.castSelected);
     },
     getYears() {
       return _.range(this.minYear, this.maxYear);
     },
+    onSearchButtonClick() {
+      this.$emit('search', {
+        titleFilter: this.titleFilter,
+        startYear: this.startYear,
+        endYear: this.endYear,
+        genresSelected: this.genresSelected,
+        castSelected: this.castSelected,
+      })
+    }
   },
 }
 </script>

@@ -5,11 +5,7 @@
     :maxYear="maxYear"
     :genres="genres"
     :cast="cast"
-    @title-filter="onTitleFilterChange"
-    @start-year="onStartYearChange"
-    @end-year="onEndYearChange"
-    @genres-selected="onGenreFilterChange"
-    @cast-selected="onCastFilterChange"
+    @search="search"
     />
   <MovieList :movieData="filterMovies()" />
   <button @click="showMore">Show more</button>
@@ -80,25 +76,12 @@ export default {
 
       return filteredMovieList.slice(0, this.noOfVisible);
     },
-    onTitleFilterChange(msg) {
-      this.titleFilter = msg;
-      this.noOfVisible = this.minNoOfVisible;
-    },
-    onStartYearChange(msg) {
-      this.startYear = msg;
-      this.noOfVisible = this.minNoOfVisible;
-    },
-    onEndYearChange(msg) {
-      this.endYear = msg;
-      this.noOfVisible = this.minNoOfVisible;
-    },
-    onGenreFilterChange(msg) {
-      this.genresSelected = msg;
-      this.noOfVisible = this.minNoOfVisible;
-    },
-    onCastFilterChange(msg) {
-      this.castSelected = msg;
-      this.noOfVisible = this.minNoOfVisible;
+    search(msg) {
+      this.titleFilter = msg.titleFilter
+      this.startYear = msg.startYear
+      this.endYear = msg.endYear
+      this.genresSelected = msg.genresSelected.slice(0)
+      this.castSelected = msg.castSelected.slice(0)
     },
   }
 }
