@@ -8,7 +8,9 @@
     @search="search"
     />
   <MovieList :movieData="filterMovies()" />
-  <button @click="showMore">Show more</button>
+  <button @click="showMore" v-if="noOfVisible < noOfEntries">
+    Show more
+  </button>
 </template>
 
 <script>
@@ -32,6 +34,7 @@ export default {
 
       noOfVisible: 10,
       minNoOfVisible: 10,
+      noOfEntries: 0,
 
       minYear: 1900,
       maxYear: 2024,
@@ -57,6 +60,8 @@ export default {
             && (this.castSelected.length == 0
                 || _.intersection(e.cast, this.castSelected).length > 0)
       });
+
+      this.noOfEntries = filteredMovieList.length
 
       return filteredMovieList.slice(0, this.noOfVisible);
     },
