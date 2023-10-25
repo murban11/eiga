@@ -27,12 +27,8 @@ export default {
   data() {
     return {
       movieData: MovieData,
-      genres: _.uniq(_.flatten(_.map(MovieData, (e) => {
-        return e.genres;
-      }), 1)),
-      cast: _.uniq(_.flatten(_.map(MovieData, (e) => {
-        return e.cast;
-      }), 1)),
+      genres: _.uniq(_.flatten(_.map(MovieData, _.property('genres')), 1)),
+      cast: _.uniq(_.flatten(_.map(MovieData, _.property('cast')), 1)),
 
       noOfVisible: 10,
       minNoOfVisible: 10,
@@ -53,26 +49,13 @@ export default {
     },
     filterMovies() {
       let filteredMovieList = _.filter(this.movieData, (e) => {
-        return e.year >= this.startYear && e.year <= this.endYear;
+        return (e.year >= this.startYear && e.year <= this.endYear)
+            && (this.titleFilter === '' || e.title === this.titleFilter)
+            && (this.genresSelected.length == 0
+                || _.intersection(e.genres, this.genresSelected).length > 0)
+            && (this.castSelected.length == 0
+                || _.intersection(e.cast, this.castSelected).length > 0)
       });
-
-      if (this.titleFilter !== '') {
-        filteredMovieList = _.filter(filteredMovieList, (e) => {
-          return e.title === this.titleFilter;
-        });
-      }
-
-      if (this.genresSelected.length > 0) {
-        filteredMovieList = _.filter(filteredMovieList, (e) => {
-          return _.intersection(e.genres, this.genresSelected).length > 0;
-        });
-      }
-
-      if (this.castSelected.length > 0) {
-        filteredMovieList = _.filter(filteredMovieList, (e) => {
-          return _.intersection(e.cast, this.castSelected).length > 0;
-        });
-      }
 
       return filteredMovieList.slice(0, this.noOfVisible);
     },
