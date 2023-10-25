@@ -60,6 +60,7 @@ export default {
       return filteredMovieList.slice(0, this.noOfVisible);
     },
     search(msg) {
+      this.noOfVisible = this.minNoOfVisible
       this.titleFilter = msg.titleFilter
       this.startYear = msg.startYear
       this.endYear = msg.endYear
