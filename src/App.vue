@@ -50,7 +50,8 @@ export default {
     filterMovies() {
       let filteredMovieList = _.filter(this.movieData, (e) => {
         return (e.year >= this.startYear && e.year <= this.endYear)
-            && (this.titleFilter === '' || e.title === this.titleFilter)
+            && (this.titleFilter === ''
+                || e.title.toLowerCase() === this.titleFilter.toLowerCase())
             && (this.genresSelected.length == 0
                 || _.intersection(e.genres, this.genresSelected).length > 0)
             && (this.castSelected.length == 0
