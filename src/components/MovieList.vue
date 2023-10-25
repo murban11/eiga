@@ -5,8 +5,8 @@
       <li v-for="(movie, i) in movieData" :key="i">
         Title: {{ movie.title }}<br>
         Year: {{ movie.year }}<br>
-        Cast: {{ movie.cast.join(', ') }}<br>
         Genres: {{ movie.genres.join(', ') }}<br>
+        Cast: {{ movie.cast.join(', ') }}<br>
       </li>
     </ul>
   </div>
