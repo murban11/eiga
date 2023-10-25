@@ -9,8 +9,12 @@
     />
   <MovieList :movieData="filterMovies()" />
   <span v-if="noOfEntries == 0">No matching results found</span>
-  <button @click="showMore" v-if="noOfVisible < noOfEntries">
-    Show more
+  <button
+    @click="showMore"
+    v-if="noOfVisible < noOfEntries"
+    class="btn btn-primary"
+    >
+      Show more
   </button>
 </template>
 
@@ -84,7 +88,23 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #C0CAF5;
+  background-color: #1A1B26;
+}
+
+body {
+    background-color: #F7768E;
+}
+
+input {
+    color: #1A1B26;
+    border-color: #A9B1D6;
+    background-color: #A9B1D6;
+}
+
+.btn-primary {
+  color: #1A1B26;
+  border-color: #7AA2F7;
+  background-color: #7AA2F7;
 }
 </style>

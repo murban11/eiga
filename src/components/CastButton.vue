@@ -1,5 +1,10 @@
 <template>
-  <button @click="onClick" :class="cast" type="button">
+  <button
+      @click="onClick"
+      :class="cast"
+      class="btn btn-secondary m-1"
+      type="button"
+      >
     {{ cast }}
   </button>
 </template>

@@ -1,5 +1,10 @@
 <template>
-  <button @click="onClick" :class="{ selected: isSelected }" type="button">
+  <button
+      @click="onClick"
+      :class="{ selected: isSelected }"
+      class="btn btn-secondary m-1"
+      type="button"
+      >
     {{ genre }}
   </button>
 </template>
@@ -30,6 +35,9 @@ export default {
 
 <style>
 .selected {
+  background-color: #E0AF68;
+}
+.selected:hover {
   background-color: #E0AF68;
 }
 </style>

@@ -1,26 +1,40 @@
 <template>
-  <div>
-    <form>
-      <fieldset>
+  <div class="my-4">
+    <form class="form">
+      <fieldset class="mb-4">
         <legend>Title</legend>
         <input type="text" @input="onTitleInputChange" />
       </fieldset>
-      <fieldset>
+      <fieldset class="container mb-4">
         <legend>Release Year</legend>
-        <label for="startYear">from:</label>
-        <select id="startYear" @input="onStartYearInput"> 
-          <option v-for="i in getYears()" :key="i">
-              {{ i }}
-          </option>
-        </select>
-        <label for="endYear">to:</label>
-        <select id="endYear" @input="onEndYearInput">
-          <option v-for="i in getYears().reverse()" :key="i">
-              {{ i }}
-          </option>
-        </select>
+        <div class="row">
+          <div class="form-group col">
+            <label for="startYear" class="form-label">from:</label>
+            <select
+                id="startYear"
+                @input="onStartYearInput"
+                class="form-select ms-2 me-4 text-center"
+                >
+              <option v-for="i in getYears()" :key="i">
+                  {{ i }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group col">
+            <label for="endYear" class="form-label">to:</label>
+            <select
+                id="endYear"
+                @input="onEndYearInput"
+                class="form-select ms-2 text-center"
+                >
+              <option v-for="i in getYears().reverse()" :key="i">
+                  {{ i }}
+              </option>
+            </select>
+          </div>
+        </div>
       </fieldset>
-      <fieldset>
+      <fieldset class="mb-4">
         <legend>Genres</legend>
         <GenreButton
           v-for="(genre, i) in genres"
@@ -29,7 +43,7 @@
           @select-toggle="onGenreToggle"
           />
       </fieldset>
-      <fieldset>
+      <fieldset class="mb-4">
         <legend>Cast</legend>
         <div>
           <CastButton
@@ -40,14 +54,20 @@
             />
         </div>
         <input v-model="castInput" type="search" list="castList" />
-        <button @click="onCastSelect" type="button">+</button>
+        <button @click="onCastSelect" type="button" id="castAdd">+</button>
         <datalist id="castList">
           <option v-for="(c, i) in cast" :key="i">
             {{ c }}
           </option>
         </datalist>
       </fieldset>
-      <button @click="onSearchButtonClick" type="button">Search</button>
+      <button
+        @click="onSearchButtonClick"
+        type="button"
+        class="btn btn-primary"
+        >
+          Search
+      </button>
     </form>
   </div>
 </template>
@@ -134,3 +154,19 @@ export default {
   },
 }
 </script>
+
+<style>
+.form-select {
+  background-color: #A9B1D6;
+}
+
+#castAdd {
+  background-color: #7AA2F7;
+}
+
+.btn-primary {
+  color: #1A1B26;
+  border-color: #7AA2F7;
+  background-color: #7AA2F7;
+}
+</style>

@@ -1,14 +1,42 @@
 <template>
   <div>
     <h2>Movies</h2>
-    <ul>
-      <li v-for="(movie, i) in movieData" :key="i">
-        Title: {{ movie.title }}<br>
-        Year: {{ movie.year }}<br>
-        Genres: {{ movie.genres.join(', ') }}<br>
-        Cast: {{ movie.cast.join(', ') }}<br>
-      </li>
-    </ul>
+    <div class="my-4">
+      <div v-for="(movie, i) in movieData" :key="i" class="container my-2">
+        <div class="row">
+          <div class="col-1 text-end">
+            Title:
+          </div>
+          <div class="col-11 text-start">
+            {{ movie.title }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1 text-end">
+            Year:
+          </div>
+          <div class="col-11 text-start">
+            {{ movie.year }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1 text-end">
+            Genres:
+          </div>
+          <div class="col-11 text-start">
+            {{ movie.genres.join(', ') }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-1 text-end">
+            Cast:
+          </div>
+          <div class="col-11 text-start">
+            {{ movie.cast.join(', ') }}
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
