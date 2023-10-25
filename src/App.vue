@@ -8,6 +8,7 @@
     @search="search"
     />
   <MovieList :movieData="filterMovies()" />
+  <span v-if="noOfEntries == 0">No matching results found</span>
   <button @click="showMore" v-if="noOfVisible < noOfEntries">
     Show more
   </button>
