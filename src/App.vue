@@ -34,7 +34,7 @@ export default {
   data() {
     return {
       movieData: MovieData,
-      genres: _.uniq(_.flatten(_.map(MovieData, _.property('genres')), 1)),
+      genres: _.uniq(_.flatten(_.map(MovieData, _.property('genres')), 1)).sort(),
       cast: _.uniq(_.flatten(_.map(MovieData, _.property('cast')), 1)),
 
       noOfVisible: 10,
