@@ -2,37 +2,49 @@
   <div>
     <h2>Movies</h2>
     <div class="my-4">
-      <div v-for="(movie, i) in movieData" :key="i" class="container my-2">
+      <div
+          v-for="(movie, i) in movieData"
+          :key="i"
+          class="movie my-2 p-2 container">
         <div class="row">
-          <div class="col-2 text-end">
-            Title:
+          <div class="col-1">
+            <span class="align-middle">
+              {{ i + 1 }}
+            </span>
           </div>
-          <div class="col-10 text-start">
-            {{ movie.title }}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-2 text-end">
-            Year:
-          </div>
-          <div class="col-10 text-start">
-            {{ movie.year }}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-2 text-end">
-            Genres:
-          </div>
-          <div class="col-10 text-start">
-            {{ movie.genres.join(', ') }}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-2 text-end">
-            Cast:
-          </div>
-          <div class="col-10 text-start">
-            {{ movie.cast.join(', ') }}
+          <div class="col-11 container">
+            <div class="row">
+              <div class="col-2 text-end">
+                Title:
+              </div>
+              <div class="col-9 text-start">
+                {{ movie.title }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-2 text-end">
+                Year:
+              </div>
+              <div class="col-9 text-start">
+                {{ movie.year }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-2 text-end">
+                Genres:
+              </div>
+              <div class="col-9 text-start">
+                {{ movie.genres.join(', ') }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-2 text-end">
+                Cast:
+              </div>
+              <div class="col-9 text-start">
+                {{ movie.cast.join(', ') }}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -49,3 +61,11 @@ export default {
   }
 }
 </script>
+
+<style>
+.movie {
+  border-color: #A9B1D6;
+  border-style: solid;
+  border-radius: 1em;
+}
+</style>
