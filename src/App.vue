@@ -7,7 +7,10 @@
     :cast="cast"
     @search="search"
     />
-  <MovieList :movieData="filterMovies()" />
+  <MovieList
+    :movieData="filterMovies()"
+    :noOfEntries="noOfEntries"
+    />
   <span v-if="noOfEntries == 0">No matching results found</span>
   <button
     @click="showMore"

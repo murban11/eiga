@@ -1,6 +1,9 @@
 <template>
   <div>
     <h2>Movies</h2>
+    <div v-if="noOfEntries > 10">
+      {{ movieData.length }} of {{ noOfEntries }} results
+    </div>
     <div class="my-4">
       <div
           v-for="(movie, i) in movieData"
@@ -57,6 +60,9 @@ export default {
   props: {
     movieData: {
       type: Array,
+    },
+    noOfEntries: {
+      type: Number,
     },
   }
 }
