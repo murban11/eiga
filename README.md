@@ -1,29 +1,22 @@
 # Eiga
 
+A movie search engine written for a class project.
+
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/a689eb72-bee6-4dad-8d9e-cb547b91f6c4" />
+</p>
+
 ## Cloning
 ```
 git clone --recurse-submodules https://github.com/murban11/eiga
 ```
 
-## Project setup
+## Running
 ```
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## License
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[MIT](https://github.com/murban11/eiga/blob/main/LICENSE)
